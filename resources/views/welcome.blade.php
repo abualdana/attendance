@@ -42,7 +42,7 @@
         <form method="POST" action="getReport">
             @csrf
             <div class="form-group text-center">
-                <input type="checkbox" onchange="oneRep(this.checked)" name="theo_lab" title="النظري"> نظري و عملي  
+                <input type="checkbox" onchange="oneRep(this.checked)" name="theo_lab" title="لإرفاق ملفين"> نظري و عملي  
             </div>
             <div id="twoRep">
                 <div class="form-group text-right">
