@@ -1,98 +1,74 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+<!DOCTYPE>
+<html>
+<header>
+<link href="css/bootstrap-main.css" rel="stylesheet">
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    function oneRep(checkbox){
+        if(checkbox){
+            document.getElementById('labLable').innerHTML = "تقرير رايات عملي";
+            document.getElementById('labInput').innerHTML = "<input type=\"file\" name=\"lab\" class=\"form-control-file\" accept=\"application/vnd.ms-excel\" required>";
+        } else {
+            location.reload();
+        }
+    }
+    
+    function selectWeeks(select){
+        if(select == 2){
+            document.getElementById("weeksFrom").innerHTML = "<input type=\"number\" name=\"week_from\" max=\"17\" class=\"form-control\" placeholder=\"من\">";
+            document.getElementById("weeksTo").innerHTML = "<input type=\"number\" name=\"week_to\" max=\"18\" class=\"form-control\" placeholder=\"إلى\">";
+        } else {
+            document.getElementById("weeksTo").innerHTML = " ";
+            document.getElementById("weeksFrom").innerHTML = " ";
+        }
+    
+    }
+</script>
+</header>
+<body>
+<div class="header">
+    <img src="img/logo.png" >
+</div>
+<div class="container">
+    <div class="content">
+        <form method="POST" action="getReport">
+            @csrf
+            <div class="form-group text-center">
+                <input type="checkbox" onchange="oneRep(this.checked)" name="theo_lab" title="النظري"> نظري و عملي  
+            </div>
+            <div id="twoRep">
+                <div class="form-group text-right">
+                    <label for="theo"> تقرير رايات </label>
+                    <input type="file" name="theo"  class="form-control-file" id="theo" accept="application/vnd.ms-excel" required>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="form-group text-right" id="labDiv">
+                    <label for="lab" id="labLable"></label>
+                    <span id="labInput"> <span>
                 </div>
             </div>
-        </div>
-    </body>
+            <div class="form-group text-right">
+                <label for="sel1"> أختر مدة الفترة:</label>
+                <select class="form-control" name="get_weeks" onchange="selectWeeks(this.value)" id="sel1">
+                    <option value="1">كل الأسابيع</option>
+                    <option value="2">تحديد الأسابيع</option>
+                </select>
+            </div>
+            <div id="weeks">
+                <div class="form-row form-group">
+                    <div class="col-6" id="weeksFrom">
+                    </div>
+                    <div class="col-6" id="weeksTo">
+                    </div>
+                </div>
+            </div>
+            <center>
+            <div class="form-group">
+                <input type="submit" name="submit" value="الحصول على التقرير النهائي">
+            </div>
+            </center>
+        </form>
+    </div>
+</div>
+</body>
 </html>
