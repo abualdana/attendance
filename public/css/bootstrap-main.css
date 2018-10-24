@@ -13,6 +13,14 @@
 	direction:rtl;
 	color: #fff;
 }
+
+.flash {
+	margin: 30 auto;
+	padding: 20px;
+	max-width: 80%;
+	direction:rtl;
+}
+
 .header{
 	margin:auto;
 	max-width:410px

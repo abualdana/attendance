@@ -31,6 +31,13 @@
     <img src="img/logo.png" >
 </div>
 <div class="container">
+    <div>
+        @if (Session::has('success'))
+            <div class="alert alert-success text-center flash">
+                <h3> {{Session::get('success')}}</h3>
+            </div>
+        @endif
+    </div>
     <div class="content">
         <form method="POST" action="getReport">
             @csrf
